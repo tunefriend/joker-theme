@@ -1,0 +1,178 @@
+# Joker Plymouth theme — dark purple void with toxic-green progress
+
+# ----------------------------- Background -----------------------------------
+bg_image = Image("background.png");
+window_max_width = Window.GetX() * 2 + Window.GetWidth();
+window_max_height = Window.GetY() * 2 + Window.GetHeight();
+screen_ratio = window_max_width / window_max_height;
+bg_image_ratio = bg_image.GetWidth() / bg_image.GetHeight();
+if (screen_ratio > bg_image_ratio)
+    bg_scale_factor = window_max_width / bg_image.GetWidth();
+else
+    bg_scale_factor = window_max_height / bg_image.GetHeight();
+scaled_bg_image = bg_image.Scale(bg_image.GetWidth() * bg_scale_factor,
+                                 bg_image.GetHeight() * bg_scale_factor);
+bg_sprite = Sprite(scaled_bg_image);
+bg_sprite.SetPosition(Window.GetX() + Window.GetWidth() / 2 - scaled_bg_image.GetWidth() / 2,
+                      Window.GetY() + Window.GetHeight() / 2 - scaled_bg_image.GetHeight() / 2,
+                      -10000);
+
+# ----------------------------- Colours --------------------------------------
+text_colour.red = 0.91;
+text_colour.green = 0.89;
+text_colour.blue = 0.94;
+
+action_text_colour.red = 0.31;
+action_text_colour.green = 1.0;
+action_text_colour.blue = 0.08;
+
+# ----------------------------- Logo -----------------------------------------
+logo.image = Image("logo.png");
+# scale logo to ~18% of min dimension
+min_dim = Window.GetWidth();
+if (Window.GetHeight() < min_dim)
+    min_dim = Window.GetHeight();
+target = min_dim * 0.18;
+scale = target / logo.image.GetWidth();
+logo.image = logo.image.Scale(logo.image.GetWidth() * scale, logo.image.GetHeight() * scale);
+logo.sprite = Sprite(logo.image);
+logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
+logo.y = Window.GetY() + Window.GetHeight() * 0.38 - logo.image.GetHeight() / 2;
+logo.sprite.SetPosition(logo.x, logo.y, 100);
+logo.width = logo.image.GetWidth();
+logo.height = logo.image.GetHeight();
+
+# ----------------------------- Progress dots --------------------------------
+progress_indicator.bullet_off = Image("progress_dot_off.png");
+progress_indicator.bullet_on = Image("progress_dot_on.png");
+progress_indicator.bullet_width = progress_indicator.bullet_off.GetWidth();
+progress_indicator.bullet_height = progress_indicator.bullet_off.GetHeight();
+progress_indicator.bullet_hspacing = progress_indicator.bullet_width * 1.8;
+progress_indicator.num_bullets = 5;
+progress_indicator.width = progress_indicator.bullet_hspacing * (progress_indicator.num_bullets - 1) + progress_indicator.bullet_width;
+progress_indicator.height = progress_indicator.bullet_height;
+progress_indicator.y = logo.y + logo.height + progress_indicator.bullet_height * 2.5;
+progress_indicator.x = Window.GetX() + Window.GetWidth() / 2 - progress_indicator.width / 2;
+
+for (i = 0; i < progress_indicator.num_bullets; i++) {
+    progress_indicator.bullet[i].sprite = Sprite();
+    progress_indicator.bullet[i].x = progress_indicator.x + i * progress_indicator.bullet_hspacing;
+    progress_indicator.bullet[i].sprite.SetPosition(progress_indicator.bullet[i].x, progress_indicator.y, 200);
+    progress_indicator.bullet[i].sprite.SetImage(progress_indicator.bullet_off);
+}
+
+progress_indicator.current = -1;
+fun progress_indicator_set(n) {
+    if (n != progress_indicator.current) {
+        if (progress_indicator.current >= 0 && progress_indicator.current < progress_indicator.num_bullets)
+            progress_indicator.bullet[progress_indicator.current].sprite.SetImage(progress_indicator.bullet_off);
+        progress_indicator.current = Math.Int(n % progress_indicator.num_bullets);
+        progress_indicator.bullet[progress_indicator.current].sprite.SetImage(progress_indicator.bullet_on);
+    }
+}
+
+# ----------------------------- Message text ---------------------------------
+message_sprite = Sprite();
+message_sprite.SetPosition(0, 0, 10000);
+
+fun display_message(text) {
+    img = Image.Text(text, text_colour.red, text_colour.green, text_colour.blue);
+    message_sprite.SetImage(img);
+    message_sprite.SetPosition(Window.GetX() + Window.GetWidth() / 2 - img.GetWidth() / 2,
+                               progress_indicator.y + progress_indicator.height * 2.2,
+                               10000);
+}
+
+fun display_normal_callback(text) {
+    display_message(text);
+}
+
+# ----------------------------- Password prompt ------------------------------
+prompt_active = 0;
+password_label = Sprite();
+password_field_image = Image("password_field.png");
+password_field = Sprite(password_field_image);
+password_field.SetOpacity(0);
+password_bullet_image = Image("password_dot.png");
+password_bullet = [];
+password_bullet_count = 0;
+
+fun clear_password_bullets() {
+    for (i = 0; i < password_bullet_count; i++) {
+        password_bullet[i].SetOpacity(0);
+    }
+    password_bullet_count = 0;
+}
+
+fun PasswordDialog(prompt) {
+    prompt_active = 1;
+    # Hide progress while prompting
+    for (i = 0; i < progress_indicator.num_bullets; i++) {
+        progress_indicator.bullet[i].sprite.SetOpacity(0);
+    }
+
+    label = Image.Text(prompt, action_text_colour.red, action_text_colour.green, action_text_colour.blue);
+    password_label.SetImage(label);
+    label_x = Window.GetX() + Window.GetWidth() / 2 - label.GetWidth() / 2;
+    label_y = progress_indicator.y;
+    password_label.SetPosition(label_x, label_y, 10000);
+
+    field_x = Window.GetX() + Window.GetWidth() / 2 - password_field_image.GetWidth() / 2;
+    field_y = label_y + label.GetHeight() + 16;
+    password_field.SetPosition(field_x, field_y, 10000);
+    password_field.SetOpacity(1);
+    clear_password_bullets();
+}
+
+fun DisplayPasswordCallback(prompt, bullets) {
+    PasswordDialog(prompt);
+    # bullets is a number of dots
+    clear_password_bullets();
+    field_x = Window.GetX() + Window.GetWidth() / 2 - password_field_image.GetWidth() / 2;
+    field_y = progress_indicator.y + 28;
+    spacing = password_bullet_image.GetWidth() + 6;
+    start_x = field_x + 18;
+    y = field_y + password_field_image.GetHeight() / 2 - password_bullet_image.GetHeight() / 2;
+    password_bullet_count = bullets;
+    for (i = 0; i < bullets; i++) {
+        if (!password_bullet[i]) {
+            password_bullet[i] = Sprite(password_bullet_image);
+        }
+        password_bullet[i].SetImage(password_bullet_image);
+        password_bullet[i].SetPosition(start_x + i * spacing, y, 10001);
+        password_bullet[i].SetOpacity(1);
+    }
+}
+
+# ----------------------------- Callbacks ------------------------------------
+fun refresh_callback() {
+    if (!prompt_active) {
+        # cycle progress dots gently
+        t = Math.Int(Plymouth.GetTime() * 3);
+        progress_indicator_set(t);
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+Plymouth.SetDisplayNormalMessageFunction(display_normal_callback);
+Plymouth.SetDisplayPasswordFunction(DisplayPasswordCallback);
+
+fun quit_callback() {
+    # fade not strictly needed
+}
+
+Plymouth.SetQuitFunction(quit_callback);
+
+# Boot progress (0.0 - 1.0) also drives dots
+fun boot_progress_callback(duration, progress) {
+    if (!prompt_active) {
+        progress_indicator_set(progress * progress_indicator.num_bullets);
+    }
+}
+Plymouth.SetBootProgressFunction(boot_progress_callback);
+
+# Message callback used by some boot paths
+fun message_callback(text) {
+    display_message(text);
+}
+Plymouth.SetMessageFunction(message_callback);

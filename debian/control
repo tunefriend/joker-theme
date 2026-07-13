@@ -1,0 +1,19 @@
+Package: joker-theme
+Version: 1.0.0
+Section: x11
+Priority: optional
+Architecture: all
+Maintainer: Joker Theme <joker-theme@local>
+Depends: dconf-cli, gsettings-desktop-schemas, python3
+Recommends: plymouth, plymouth-label, gdm3, gnome-terminal, rsync
+Suggests: brave-browser, gnome-shell
+Installed-Size: 7340
+Homepage: file:///usr/share/joker-theme/README.md
+Description: Joker desktop theme for GNOME (Debian)
+ Dark Joker-inspired theme pack: void black, royal purple, and toxic green.
+ .
+ Includes wallpapers, GTK3/GTK4 CSS overrides, GNOME settings helpers,
+ Plymouth boot splash, GDM login screen styling, and a Brave browser theme.
+ .
+ After install, run: joker-theme
+ For Brave: joker-brave-theme --force-quit

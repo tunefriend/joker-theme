@@ -1,0 +1,177 @@
+{
+  "manifest_version": 2,
+  "name": "Joker",
+  "version": "1.0.0",
+  "description": "Joker theme for Brave \u2014 void black, royal purple, toxic green.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn/QTOi64Apir/sRDjLxqXJeeoIogQPEZWjK80W8Ip2Gg8jlN9wP2EphmYn8xHGswVG9cICtgFeCZ24rwDZ+eDTPuiLF6oZJvC9v20MBryGJGbkxBxVOwAKu7Oca7ZbavrBDgkPlrGFB7gnN3317U10P8KT9AYfz++W0ZdG0fhF06uLveV50aYau5Bv7gWzKkND4X/HEePVD1s14w5EYtVCZJscZ5tqr/oB93zgNpDunMpZkaGqU4x2zjLdWJrv3fKUBx3xQYHmZjdlYeC0SbQvnMWOljpWmVhnYhFZxfcjQLu4PmVR7aDZ1kLkq4oobrslAhqAbpkXp00ZPnOdHGewIDAQAB",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "theme": {
+    "images": {
+      "theme_frame": "images/theme_frame.png",
+      "theme_frame_inactive": "images/theme_frame_inactive.png",
+      "theme_toolbar": "images/theme_toolbar.png",
+      "theme_tab_background": "images/theme_tab_background.png",
+      "theme_tab_background_inactive": "images/theme_tab_background_inactive.png",
+      "theme_ntp_background": "images/theme_ntp_background.jpg",
+      "theme_button_background": "images/theme_button_background.png"
+    },
+    "colors": {
+      "frame": [
+        12,
+        10,
+        16
+      ],
+      "frame_inactive": [
+        18,
+        14,
+        24
+      ],
+      "frame_incognito": [
+        8,
+        6,
+        12
+      ],
+      "frame_incognito_inactive": [
+        14,
+        10,
+        18
+      ],
+      "toolbar": [
+        22,
+        16,
+        32
+      ],
+      "tab_text": [
+        232,
+        228,
+        240
+      ],
+      "tab_background_text": [
+        154,
+        144,
+        168
+      ],
+      "tab_background_text_inactive": [
+        120,
+        110,
+        130
+      ],
+      "tab_background_text_incognito": [
+        200,
+        190,
+        210
+      ],
+      "tab_background_text_incognito_inactive": [
+        140,
+        130,
+        150
+      ],
+      "bookmark_text": [
+        232,
+        228,
+        240
+      ],
+      "ntp_background": [
+        12,
+        10,
+        16
+      ],
+      "ntp_text": [
+        232,
+        228,
+        240
+      ],
+      "ntp_link": [
+        80,
+        250,
+        123
+      ],
+      "ntp_header": [
+        107,
+        45,
+        139
+      ],
+      "ntp_section": [
+        22,
+        16,
+        32
+      ],
+      "ntp_section_text": [
+        232,
+        228,
+        240
+      ],
+      "ntp_section_link": [
+        57,
+        255,
+        20
+      ],
+      "button_background": [
+        22,
+        16,
+        32
+      ],
+      "omnibox_background": [
+        28,
+        18,
+        40
+      ],
+      "omnibox_text": [
+        232,
+        228,
+        240
+      ],
+      "toolbar_button_icon": [
+        192,
+        132,
+        252
+      ],
+      "toolbar_text": [
+        232,
+        228,
+        240
+      ]
+    },
+    "tints": {
+      "buttons": [
+        0.78,
+        0.55,
+        0.55
+      ],
+      "frame": [
+        -1,
+        0.4,
+        0.15
+      ],
+      "frame_inactive": [
+        -1,
+        0.3,
+        0.12
+      ],
+      "frame_incognito": [
+        0.78,
+        0.4,
+        0.1
+      ],
+      "frame_incognito_inactive": [
+        0.78,
+        0.3,
+        0.08
+      ],
+      "background_tab": [
+        0.78,
+        0.45,
+        0.2
+      ]
+    },
+    "properties": {
+      "ntp_background_alignment": "center",
+      "ntp_background_repeat": "no-repeat",
+      "ntp_logo_alternate": 1
+    }
+  }
+}

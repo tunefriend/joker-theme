@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Joker
+Description=Joker boot theme — void black, royal purple, toxic green
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/joker
+ScriptFile=/usr/share/plymouth/themes/joker/joker.script

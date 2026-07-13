@@ -1,0 +1,231 @@
+/* Joker GTK3 */
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+/*
+ * Joker Theme — GTK3 overrides
+ * Palette: void black, royal purple, toxic green, blood red
+ */
+
+@define-color joker_bg           #0c0a10;
+@define-color joker_bg_raised    #16121c;
+@define-color joker_bg_overlay   #1e1828;
+@define-color joker_fg           #e8e4f0;
+@define-color joker_fg_dim       #9a90a8;
+@define-color joker_purple       #9b4dca;
+@define-color joker_purple_deep  #6b2d8b;
+@define-color joker_purple_glow  #c084fc;
+@define-color joker_green        #39ff14;
+@define-color joker_green_dim    #2dd40f;
+@define-color joker_green_soft   #50fa7b;
+@define-color joker_red          #e63946;
+@define-color joker_border       #3a2a4a;
+
+@define-color theme_bg_color @joker_bg;
+@define-color theme_fg_color @joker_fg;
+@define-color theme_base_color @joker_bg_raised;
+@define-color theme_text_color @joker_fg;
+@define-color theme_selected_bg_color @joker_purple_deep;
+@define-color theme_selected_fg_color #ffffff;
+@define-color insensitive_bg_color @joker_bg;
+@define-color insensitive_fg_color @joker_fg_dim;
+@define-color insensitive_base_color @joker_bg_raised;
+@define-color theme_unfocused_bg_color @joker_bg;
+@define-color theme_unfocused_fg_color @joker_fg_dim;
+@define-color theme_unfocused_base_color @joker_bg_raised;
+@define-color theme_unfocused_text_color @joker_fg_dim;
+@define-color theme_unfocused_selected_bg_color @joker_purple_deep;
+@define-color theme_unfocused_selected_fg_color #ffffff;
+@define-color borders @joker_border;
+@define-color unfocused_borders @joker_border;
+@define-color warning_color #e6a817;
+@define-color error_color @joker_red;
+@define-color success_color @joker_green_soft;
+@define-color destructive_color @joker_red;
+@define-color theme_button_background_normal @joker_bg_overlay;
+@define-color theme_button_foreground_normal @joker_fg;
+
+window,
+.background,
+.csd {
+  background-color: @joker_bg;
+  color: @joker_fg;
+}
+
+headerbar,
+.titlebar {
+  background-image: none;
+  background-color: @joker_bg_raised;
+  color: @joker_fg;
+  border-bottom: 1px solid @joker_border;
+  box-shadow: none;
+}
+
+headerbar:backdrop,
+.titlebar:backdrop {
+  background-color: @joker_bg;
+  color: @joker_fg_dim;
+}
+
+button {
+  background-image: none;
+  background-color: @joker_bg_overlay;
+  color: @joker_fg;
+  border-color: @joker_border;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+button:hover {
+  background-color: alpha(@joker_purple, 0.25);
+  border-color: @joker_purple;
+  color: @joker_fg;
+}
+
+button:active,
+button:checked {
+  background-color: @joker_purple_deep;
+  border-color: @joker_purple;
+  color: white;
+}
+
+button.suggested-action,
+button.default {
+  background-image: none;
+  background-color: @joker_purple;
+  border-color: @joker_purple_deep;
+  color: white;
+}
+
+button.suggested-action:hover,
+button.default:hover {
+  background-color: @joker_purple_glow;
+  color: #0a0a0a;
+}
+
+button.destructive-action {
+  background-image: none;
+  background-color: @joker_red;
+  border-color: shade(@joker_red, 0.8);
+  color: white;
+}
+
+entry,
+.search,
+spinbutton {
+  background-image: none;
+  background-color: @joker_bg_raised;
+  color: @joker_fg;
+  border-color: @joker_border;
+  caret-color: @joker_green;
+}
+
+entry:focus,
+.search:focus,
+spinbutton:focus {
+  border-color: @joker_green_dim;
+  box-shadow: 0 0 0 1px alpha(@joker_green, 0.35);
+}
+
+notebook > header {
+  background-color: @joker_bg;
+  border-color: @joker_border;
+}
+
+notebook > header > tabs > tab:checked {
+  background-color: @joker_bg_raised;
+  color: @joker_fg;
+  box-shadow: inset 0 -2px 0 @joker_purple;
+}
+
+menu,
+.menu,
+.context-menu,
+popover,
+.popover {
+  background-color: @joker_bg_overlay;
+  color: @joker_fg;
+  border-color: @joker_border;
+}
+
+menuitem:hover,
+modelbutton:hover,
+.menuitem:hover {
+  background-color: alpha(@joker_purple, 0.35);
+  color: white;
+}
+
+scrollbar slider {
+  background-color: alpha(@joker_purple, 0.55);
+  border-radius: 8px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@joker_green, 0.55);
+}
+
+progressbar trough {
+  background-color: @joker_bg_overlay;
+  border-color: @joker_border;
+}
+
+progressbar progress {
+  background-image: none;
+  background-color: @joker_green_dim;
+}
+
+scale trough highlight {
+  background-color: @joker_purple;
+}
+
+switch:checked {
+  background-color: @joker_purple;
+}
+
+check:checked,
+radio:checked {
+  background-color: @joker_purple;
+  border-color: @joker_purple_deep;
+  color: white;
+}
+
+treeview:selected,
+list row:selected,
+.view:selected,
+iconview:selected {
+  background-color: alpha(@joker_purple, 0.4);
+  color: @joker_fg;
+}
+
+/* Sidebar active indicator */
+.sidebar row:selected,
+placessidebar row:selected {
+  background-color: alpha(@joker_purple, 0.28);
+  color: @joker_fg;
+  border-left: 3px solid @joker_green;
+}
+
+link,
+*:link {
+  color: @joker_green_soft;
+}
+
+*:link:hover {
+  color: @joker_green;
+}
+
+selection {
+  background-color: alpha(@joker_purple, 0.5);
+  color: white;
+}
+
+tooltip {
+  background-color: @joker_bg_overlay;
+  color: @joker_fg;
+  border: 1px solid @joker_border;
+}
+
+/* Nautilus / file manager polish when using gtk3 path */
+.nautilus-window .sidebar {
+  background-color: @joker_bg;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper deleted="false">
+    <name>Joker Chaos</name>
+    <filename>/usr/share/backgrounds/joker/joker-chaos.jpg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0c0a10</pcolor>
+    <scolor>#6b2d8b</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Joker Geometry</name>
+    <filename>/usr/share/backgrounds/joker/joker-geometry.jpg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0c0a10</pcolor>
+    <scolor>#39ff14</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Joker Gradient</name>
+    <filename>/usr/share/backgrounds/joker/joker-gradient.jpg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0c0a10</pcolor>
+    <scolor>#9b4dca</scolor>
+  </wallpaper>
+  <wallpaper deleted="false">
+    <name>Joker Login</name>
+    <filename>/usr/share/backgrounds/joker/joker-login.jpg</filename>
+    <options>zoom</options>
+    <shade_type>solid</shade_type>
+    <pcolor>#0c0a10</pcolor>
+    <scolor>#6b2d8b</scolor>
+  </wallpaper>
+</wallpapers>

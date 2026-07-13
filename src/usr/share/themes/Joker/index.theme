@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Joker
+Comment=Dark Joker theme — royal purple, toxic green, void black
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Joker
+MetacityTheme=Adwaita
+IconTheme=Adwaita
+CursorTheme=Adwaita
+ButtonLayout=close,minimize,maximize:

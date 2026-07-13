@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+STATE_DIR=/var/lib/joker-theme
+
+case "$1" in
+  remove|deconfigure|upgrade)
+    if command -v plymouth-set-default-theme >/dev/null 2>&1; then
+      prev=ceratopsian
+      if [[ -f "$STATE_DIR/previous-plymouth" ]]; then
+        prev=$(tr -d '[:space:]' < "$STATE_DIR/previous-plymouth")
+        [[ -z "$prev" ]] && prev=ceratopsian
+      fi
+      if [[ -d "/usr/share/plymouth/themes/$prev" ]]; then
+        plymouth-set-default-theme -R "$prev" || true
+      else
+        plymouth-set-default-theme -R text 2>/dev/null || true
+      fi
+    fi
+    ;;
+esac
+exit 0

@@ -1,0 +1,24 @@
+# Joker GDM greeter settings (joker-theme package)
+
+[org/gnome/desktop/interface]
+color-scheme='prefer-dark'
+accent-color='green'
+gtk-theme='Adwaita-dark'
+
+[org/gnome/desktop/background]
+picture-uri='file:///usr/share/backgrounds/joker/joker-login.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/joker/joker-login.jpg'
+picture-options='zoom'
+primary-color='#0c0a10'
+secondary-color='#6b2d8b'
+
+[org/gnome/desktop/screensaver]
+picture-uri='file:///usr/share/backgrounds/joker/joker-login.jpg'
+picture-options='zoom'
+primary-color='#0c0a10'
+secondary-color='#6b2d8b'
+
+[org/gnome/login-screen]
+logo='/usr/share/backgrounds/joker/joker-logo-64.png'
+banner-message-enable=true
+banner-message-text='Why so serious?'

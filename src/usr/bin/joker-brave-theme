@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec /usr/share/joker-theme/bin/install-brave-joker-theme.sh "$@"

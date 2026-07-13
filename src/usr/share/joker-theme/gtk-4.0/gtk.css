@@ -1,0 +1,184 @@
+/*
+ * Joker Theme — GTK4 / libadwaita overrides
+ * Palette: void black, royal purple, toxic green, blood red
+ */
+
+@define-color joker_bg           #0c0a10;
+@define-color joker_bg_raised    #16121c;
+@define-color joker_bg_overlay   #1e1828;
+@define-color joker_fg           #e8e4f0;
+@define-color joker_fg_dim       #9a90a8;
+@define-color joker_purple       #9b4dca;
+@define-color joker_purple_deep  #6b2d8b;
+@define-color joker_purple_glow  #c084fc;
+@define-color joker_green        #39ff14;
+@define-color joker_green_dim    #2dd40f;
+@define-color joker_green_soft   #50fa7b;
+@define-color joker_red          #e63946;
+@define-color joker_border       #3a2a4a;
+@define-color joker_card         #141018;
+
+/* Libadwaita accent & surfaces */
+@define-color accent_bg_color       @joker_purple;
+@define-color accent_fg_color       #ffffff;
+@define-color accent_color          @joker_purple_glow;
+
+@define-color window_bg_color       @joker_bg;
+@define-color window_fg_color       @joker_fg;
+
+@define-color view_bg_color         @joker_bg_raised;
+@define-color view_fg_color         @joker_fg;
+
+@define-color headerbar_bg_color    @joker_bg_raised;
+@define-color headerbar_fg_color    @joker_fg;
+@define-color headerbar_border_color @joker_border;
+@define-color headerbar_backdrop_color @joker_bg;
+@define-color headerbar_shade_color alpha(black, 0.4);
+
+@define-color sidebar_bg_color      @joker_bg;
+@define-color sidebar_fg_color      @joker_fg;
+@define-color sidebar_backdrop_color @joker_bg;
+@define-color sidebar_shade_color   alpha(black, 0.25);
+@define-color sidebar_border_color  @joker_border;
+
+@define-color secondary_sidebar_bg_color @joker_bg_raised;
+@define-color secondary_sidebar_fg_color @joker_fg;
+@define-color secondary_sidebar_backdrop_color @joker_bg;
+@define-color secondary_sidebar_shade_color alpha(black, 0.25);
+@define-color secondary_sidebar_border_color @joker_border;
+
+@define-color card_bg_color         @joker_card;
+@define-color card_fg_color         @joker_fg;
+@define-color card_shade_color      alpha(black, 0.35);
+
+@define-color dialog_bg_color       @joker_bg_raised;
+@define-color dialog_fg_color       @joker_fg;
+
+@define-color popover_bg_color      @joker_bg_overlay;
+@define-color popover_fg_color      @joker_fg;
+@define-color popover_shade_color   alpha(black, 0.4);
+
+@define-color thumbnail_bg_color    @joker_bg_raised;
+@define-color thumbnail_fg_color    @joker_fg;
+
+@define-color shade_color           alpha(black, 0.35);
+@define-color scrollbar_outline_color alpha(black, 0.5);
+
+@define-color destructive_bg_color  @joker_red;
+@define-color destructive_fg_color  #ffffff;
+@define-color destructive_color     @joker_red;
+
+@define-color success_bg_color      @joker_green_dim;
+@define-color success_fg_color      #0a0a0a;
+@define-color success_color         @joker_green_soft;
+
+@define-color warning_bg_color      #e6a817;
+@define-color warning_fg_color      #1a1200;
+@define-color warning_color         #ffd666;
+
+@define-color error_bg_color        @joker_red;
+@define-color error_fg_color        #ffffff;
+@define-color error_color           #ff6b75;
+
+/* Selection */
+@define-color theme_selected_bg_color @joker_purple_deep;
+@define-color theme_selected_fg_color #ffffff;
+
+window,
+.background {
+  background-color: @joker_bg;
+  color: @joker_fg;
+}
+
+/* Suggested / accent buttons — purple with green hover spark */
+button.suggested-action,
+button.default,
+.suggested-action {
+  background-image: image(@joker_purple);
+  color: white;
+  border-color: @joker_purple_deep;
+}
+
+button.suggested-action:hover,
+button.default:hover,
+.suggested-action:hover {
+  background-image: image(@joker_purple_glow);
+  color: #0a0a0a;
+}
+
+/* Destructive stays blood-red */
+button.destructive-action {
+  background-image: image(@joker_red);
+  color: white;
+}
+
+/* Links in toxic green */
+link,
+a {
+  color: @joker_green_soft;
+}
+
+link:hover,
+a:hover {
+  color: @joker_green;
+}
+
+/* Selection highlight */
+selection,
+*:selected {
+  background-color: alpha(@joker_purple, 0.45);
+  color: @joker_fg;
+}
+
+/* Check / switch accents lean purple */
+check:checked,
+radio:checked,
+switch:checked {
+  background-color: @joker_purple;
+  border-color: @joker_purple_deep;
+}
+
+/* Progress bars — green fill on purple track vibe */
+progressbar trough progress,
+progressbar progress {
+  background-image: image(@joker_green_dim);
+}
+
+/* Scrollbars subtle purple */
+scrollbar slider {
+  background-color: alpha(@joker_purple, 0.55);
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@joker_green, 0.55);
+}
+
+/* Entry focus ring — green glow */
+entry:focus,
+entry:focus-within,
+textview:focus,
+searchbar entry:focus {
+  border-color: @joker_green_dim;
+  box-shadow: 0 0 0 1px alpha(@joker_green, 0.35);
+}
+
+/* Headerbar polish */
+headerbar {
+  background-color: @joker_bg_raised;
+  color: @joker_fg;
+  border-bottom: 1px solid @joker_border;
+}
+
+/* Sidebar active row */
+list row:selected,
+.navigation-sidebar row:selected {
+  background-color: alpha(@joker_purple, 0.28);
+  color: @joker_fg;
+  box-shadow: inset 3px 0 0 @joker_green;
+}
+
+/* Tabs */
+tab:checked,
+.tab-overview tab:selected {
+  box-shadow: inset 0 -2px 0 @joker_purple;
+}

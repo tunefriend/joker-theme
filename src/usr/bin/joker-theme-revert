@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec /usr/share/joker-theme/bin/revert-joker-theme.sh "$@"

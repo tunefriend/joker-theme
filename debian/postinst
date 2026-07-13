@@ -1,0 +1,101 @@
+#!/bin/bash
+set -e
+
+STATE_DIR=/var/lib/joker-theme
+mkdir -p "$STATE_DIR"
+
+configure_plymouth() {
+  if ! command -v plymouth-set-default-theme >/dev/null 2>&1; then
+    echo "joker-theme: plymouth not installed; skipping boot splash."
+    return 0
+  fi
+  if [[ ! -d /usr/share/plymouth/themes/joker ]]; then
+    return 0
+  fi
+  if [[ ! -f "$STATE_DIR/previous-plymouth" ]]; then
+    prev=$(plymouth-set-default-theme 2>/dev/null || true)
+    if [[ -z "$prev" || "$prev" == "joker" ]]; then
+      prev=ceratopsian
+    fi
+    echo "$prev" > "$STATE_DIR/previous-plymouth"
+  fi
+  # -R rebuilds initramfs
+  plymouth-set-default-theme -R joker || {
+    echo "joker-theme: warning: could not set plymouth theme" >&2
+    return 0
+  }
+  echo "joker-theme: Plymouth theme set to 'joker'."
+}
+
+configure_gdm() {
+  if [[ ! -f /usr/share/gdm/dconf/95-joker-theme ]]; then
+    return 0
+  fi
+  if [[ -x /usr/share/gdm/generate-config ]]; then
+    /usr/share/gdm/generate-config || true
+  elif command -v dconf >/dev/null 2>&1 && [[ -d /usr/share/gdm/dconf ]]; then
+    dconf compile /var/lib/gdm3/greeter-dconf-defaults /usr/share/gdm/dconf 2>/dev/null || true
+  fi
+  echo "joker-theme: GDM greeter config updated."
+}
+
+apply_for_user() {
+  local user="$1" home="$2"
+  [[ -n "$user" && -d "$home" ]] || return 0
+  # Skip system users
+  [[ "$user" == "root" ]] && return 0
+
+  local uid
+  uid=$(id -u "$user" 2>/dev/null) || return 0
+  local runtime="/run/user/$uid"
+  local dbus="unix:path=$runtime/bus"
+
+  if [[ ! -S "$runtime/bus" ]]; then
+    echo "joker-theme: user $user has no session bus; run 'joker-theme' after login."
+    return 0
+  fi
+
+  sudo -u "$user" env HOME="$home" XDG_RUNTIME_DIR="$runtime" \
+    DBUS_SESSION_BUS_ADDRESS="$dbus" \
+    /usr/share/joker-theme/bin/apply-joker-theme.sh --green || true
+
+  # Brave only if profile exists and browser not critical — skip auto force-quit
+  if [[ -f "$home/.config/BraveSoftware/Brave-Browser/Default/Preferences" ]]; then
+    if ! pgrep -u "$uid" -f '/opt/brave.com/brave/brave' >/dev/null 2>&1; then
+      sudo -u "$user" env HOME="$home" \
+        /usr/share/joker-theme/bin/install-brave-joker-theme.sh --no-relaunch 2>/dev/null || true
+    else
+      echo "joker-theme: Brave is running for $user — later run: joker-brave-theme --force-quit"
+    fi
+  fi
+}
+
+case "$1" in
+  configure)
+    configure_plymouth
+    configure_gdm
+
+    # Apply desktop theme for the user who invoked sudo apt/dpkg, if any
+    TARGET_USER="${SUDO_USER:-}"
+    if [[ -z "$TARGET_USER" && -n "${PKEXEC_UID:-}" ]]; then
+      TARGET_USER=$(getent passwd "$PKEXEC_UID" | cut -d: -f1 || true)
+    fi
+    if [[ -n "$TARGET_USER" ]]; then
+      TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
+      apply_for_user "$TARGET_USER" "$TARGET_HOME"
+    fi
+
+    cat <<'MSG'
+
+joker-theme installed.
+
+  Desktop : joker-theme
+  Revert  : joker-theme-revert
+  Brave   : joker-brave-theme --force-quit
+  Boot/login styling applied system-wide (reboot to see Plymouth).
+
+MSG
+    ;;
+esac
+
+exit 0

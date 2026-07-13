@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+case "$1" in
+  remove|purge)
+    rm -f /usr/share/gdm/dconf/95-joker-theme
+    if [[ -x /usr/share/gdm/generate-config ]]; then
+      /usr/share/gdm/generate-config || true
+    elif command -v dconf >/dev/null 2>&1 && [[ -d /usr/share/gdm/dconf ]]; then
+      dconf compile /var/lib/gdm3/greeter-dconf-defaults /usr/share/gdm/dconf 2>/dev/null || true
+    fi
+    # Plymouth theme files removed with package; initramfs already rebuilt in prerm
+    if [[ "$1" == "purge" ]]; then
+      rm -rf /var/lib/joker-theme
+    fi
+    ;;
+esac
+exit 0

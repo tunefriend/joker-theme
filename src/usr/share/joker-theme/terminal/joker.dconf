@@ -1,0 +1,16 @@
+[/]
+visible-name='Joker'
+background-color='rgb(12,10,16)'
+foreground-color='rgb(232,228,240)'
+cursor-colors-set=true
+cursor-background-color='rgb(57,255,20)'
+cursor-foreground-color='rgb(12,10,16)'
+highlight-colors-set=true
+highlight-background-color='rgb(107,45,139)'
+highlight-foreground-color='rgb(255,255,255)'
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
+background-transparency-percent=8
+bold-color-same-as-fg=true
+palette=['rgb(12,10,16)', 'rgb(230,57,70)', 'rgb(45,212,15)', 'rgb(230,168,23)', 'rgb(155,77,202)', 'rgb(192,132,252)', 'rgb(80,250,123)', 'rgb(200,196,210)', 'rgb(58,42,74)', 'rgb(255,107,117)', 'rgb(57,255,20)', 'rgb(255,214,102)', 'rgb(192,132,252)', 'rgb(216,180,254)', 'rgb(134,239,172)', 'rgb(248,246,252)']
