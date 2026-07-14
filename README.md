@@ -57,6 +57,6 @@ dpkg-deb --build /tmp/joker-build joker-theme_1.0.0_all.deb
 
 ## License
 
-MIT — see [debian/copyright](debian/copyright).
+[GPL-3.0-or-later](LICENSE) — see also [debian/copyright](debian/copyright).
 
 Made with 🃏 by friends of TuneFriend.
